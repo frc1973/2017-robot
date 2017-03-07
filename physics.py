@@ -43,7 +43,7 @@ class PhysicsEngine(object):
         self.ft_per_sec = 5
         self.wheel_circumference = 18.8
 
-        self.physics_controller.add_device_gyro_channel('adxrs450_spi_4_angle')
+        self.physics_controller.add_device_gyro_channel('adxrs450_spi_0_angle')
         
         if VisionSim is not None:
             targets = [

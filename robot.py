@@ -26,6 +26,9 @@ class MyRobot(MagicRobot):
         #light
         #lifter: 1 motor
         #
+        
+        self.gyro = wpilib.ADXRS450_Gyro()
+        
 
 
 
@@ -35,5 +38,6 @@ class MyRobot(MagicRobot):
            put a loop in"""
 
         self.myRobot.arcadeDrive(self.leftStick, True)
+        
 if __name__ == '__main__':
     wpilib.run(MyRobot)
