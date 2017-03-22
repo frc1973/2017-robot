@@ -22,13 +22,12 @@ class MyRobot(MagicRobot):
         self.leftStick = wpilib.Joystick(0)
         self.rightStick = wpilib.Joystick(1)
 
-        # 5motor controlors: 1colocter, 2 for weels, 1 for shooter
+        # 5 motor controlors: 1colocter, 2 for weels, 1 for shooter
         #light
         #lifter: 1 motor
         #
-        
+
         self.gyro = wpilib.ADXRS450_Gyro()
-        
 
 
 
@@ -38,6 +37,6 @@ class MyRobot(MagicRobot):
            put a loop in"""
 
         self.myRobot.arcadeDrive(self.leftStick, True)
-        
+
 if __name__ == '__main__':
     wpilib.run(MyRobot)

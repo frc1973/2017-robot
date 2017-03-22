@@ -6,7 +6,7 @@ import wpilib
 class DriveFoward(AutonomousStateMachine):
 
     MODE_NAME = 'Drive Foward'
-    DEFAULT = True
+    DEFAULT = False
 
     myRobot = wpilib.RobotDrive
 
