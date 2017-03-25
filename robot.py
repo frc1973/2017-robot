@@ -3,11 +3,15 @@
 import wpilib
 from magicbot import MagicRobot
 
+from components.drivetrain import DriveTrain
+
 class MyRobot(MagicRobot):
 
     #
     # Define components here
     #
+    
+    drivetrain = DriveTrain
 
     def createObjects(self):
         """Initialize all wpilib motors & sensors"""
@@ -15,12 +19,18 @@ class MyRobot(MagicRobot):
         # camera
         # utrasoni sensors
         # motors
+        
+        self.robot = self
 
         self.left_motor = wpilib.Spark(0)
         self.right_motor = wpilib.Spark(1)
 
         self.lifter_motor = wpilib.Talon(2)
-
+        
+        self.ultrasonic = wpilib.AnalogInput(0)
+        
+        self.light_relay = wpilib.Relay(0)
+        self.light_relay.set(wpilib.Relay.Value.kOn)
 
         self.myRobot = wpilib.RobotDrive(self.left_motor, self.right_motor)
         self.myRobot.setSafetyEnabled(False)
@@ -35,16 +45,17 @@ class MyRobot(MagicRobot):
         #
 
         self.gyro = wpilib.ADXRS450_Gyro()
-
-
-
+    
     def teleopPeriodic(self):
         """Place code here that does things as a result of operator
            actions. This code gets called over and over again, do not
            put a loop in"""
-
-        self.myRobot.arcadeDrive(self.leftStick, True)
-
+        
+        self.drivetrain.move(self.leftStick.getY(), self.leftStick.getX())
+        
+        if self.leftStick.getTrigger():
+            self.drivetrain.driveToWall()
+        
         if self.rightStick.getTrigger():
             self.lifter_motor.set(self.rightStick.getY())
         else:
