@@ -15,7 +15,14 @@ class MyRobot(MagicRobot):
         # camera
         # utrasoni sensors
         # motors
-        self.myRobot = wpilib.RobotDrive(0,1)
+
+        self.left_motor = wpilib.Spark(0)
+        self.right_motor = wpilib.Spark(1)
+
+        self.lifter_motor = wpilib.Talon(2)
+
+
+        self.myRobot = wpilib.RobotDrive(self.left_motor, self.right_motor)
         self.myRobot.setSafetyEnabled(False)
 
         #2Joysticks
@@ -37,6 +44,11 @@ class MyRobot(MagicRobot):
            put a loop in"""
 
         self.myRobot.arcadeDrive(self.leftStick, True)
+
+        if self.rightStick.getTrigger():
+            self.lifter_motor.set(self.rightStick.getY())
+        else:
+            self.lifter_motor.set(0)
 
 if __name__ == '__main__':
     wpilib.run(MyRobot)

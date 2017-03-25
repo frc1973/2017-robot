@@ -1,13 +1,16 @@
 from magicbot import AutonomousStateMachine, timed_state, state
-import
+import wpilib
+class Rotater (AutonomousStateMachine):
 
-if  self.LastTime < NewTime:
-    self.Found=Found
-    self.LastTime=Time
-    self.TAEGET=RA-offset
+    def _init_  (self, robot, FOUND, DISTANCE):
 
-if self.found:
-  offset=RA-self.TAEGET
-  X= Px*offset
-  if abs (offset)<10:
-  Y= Py(DISTANCE)
+        if self.LASTTM<TM:
+           self.FOUND=FOUND
+           self.LASTTM=TM
+           self.TARGET=RA-OFFSET
+
+        if self.FOUND:
+            OFFSET=RA-self.TARGET
+            x=Px*OFFSET
+            if abs(OFFSET)<10:
+               Y=Py*(DISTANCE)

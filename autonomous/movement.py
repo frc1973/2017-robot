@@ -5,8 +5,9 @@ import wpilib
 
 class Movement(AutonomousStateMachine):
 
+
     MODE_NAME = 'Movement'
-    DEFAULT = True
+    DEFAULT = False
 
     myRobot = wpilib.RobotDrive
     gyro = wpilib.ADXRS450_Gyro
