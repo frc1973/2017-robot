@@ -7,13 +7,11 @@ from components.drivetrain import DriveTrain
 
 class MiddleGear(AutonomousStateMachine):
 
-    MODE_NAME = 'Drive Forward'
+    MODE_NAME = 'MiddleGear'
     default = False
-    
+
     drivetrain = DriveTrain
-    
-    def deriveTothewall (self):
-        self.derive_forward()
-    
-        
-        
+
+    @timed_state(duration=5, first=True)
+    def driveTothewall(self):
+        self.drivetrain.driveToWall()

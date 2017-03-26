@@ -18,7 +18,7 @@ try:
     from pyfrc.physics.visionsim import VisionSim
 except ImportError:
     VisionSim = None
-    
+
 from networktables import NetworkTables
 
 #from components.drive import Drive
@@ -44,7 +44,7 @@ class PhysicsEngine(object):
         self.wheel_circumference = 18.8
 
         self.physics_controller.add_device_gyro_channel('adxrs450_spi_0_angle')
-        
+
         if VisionSim is not None:
             targets = [
                 # right
@@ -54,12 +54,12 @@ class PhysicsEngine(object):
                 # left
                 VisionSim.Target(16, 20, 340, 110), # angle is -142
             ]
-            
+
             self.vision = VisionSim(targets, 61.0,
                                     1.5, 15, 15)
         else:
             self.vision = None
-            
+
     @property
     def nt(self):
         try:
@@ -79,8 +79,8 @@ class PhysicsEngine(object):
         '''
 
         # Simulate the drivetrain
-        l_motor = hal_data['pwm'][0]['value']
-        r_motor = hal_data['pwm'][1]['value']
+        l_motor = -hal_data['pwm'][0]['value']
+        r_motor = -hal_data['pwm'][1]['value']
 
         speed, rotation = drivetrains.two_motor_drivetrain(l_motor, r_motor, speed=self.ft_per_sec)
         self.physics_controller.drive(speed, rotation, tm_diff)
@@ -93,11 +93,10 @@ class PhysicsEngine(object):
         # -> encoder = distance / (wheel_circumference / 360.0)
 
         hal_data['encoder'][0]['count'] += int(distance_inches / (self.wheel_circumference/360.0))
-        
+
         if self.vision:
             x, y, angle = self.physics_controller.get_position()
-            
+
             data = self.vision.compute(now, x, y, angle)
             if data is not None:
                 self.nt.putNumberArray('/camera/target', data[0][:3])
-        
