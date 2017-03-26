@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import wpilib
-from magicbot import MagicRobot
+from magicbot import MagicRobot, tunable
 
 from components.drivetrain import DriveTrain
 
@@ -12,6 +12,8 @@ class MyRobot(MagicRobot):
     #
 
     drivetrain = DriveTrain
+
+    twitchy = tunable(0.7)
 
     def createObjects(self):
         """Initialize all wpilib motors & sensors"""
@@ -56,14 +58,14 @@ class MyRobot(MagicRobot):
            actions. This code gets called over and over again, do not
            put a loop in"""
 
-        self.drivetrain.move(self.leftStick.getY(), self.leftStick.getX())
+        self.drivetrain.move(self.leftStick.getY(), self.twitchy*self.leftStick.getX())
 
         if self.leftStick.getTrigger():
             self.drivetrain.driveToWall()
 
         if not self.rightStick.getTrigger():
-            if self.leftStick.getRawButton(10):
-                self.drivetrain.move(-self.leftStick.getY(), self.leftStick.getX())
+            if self.leftStick.getRawButton(7):
+                self.drivetrain.move(-self.leftStick.getY(), self.twitchy*self.leftStick.getX())
                 self.lifter_motor.set(1)
             else:
                 self.lifter_motor.set(0)
