@@ -51,7 +51,7 @@ class MyRobot(MagicRobot):
 
         self.gyro = wpilib.ADXRS450_Gyro()
 
-        wpilib.CameraServer.launch()
+        wpilib.CameraServer.launch('vision.py:main')
 
     def teleopPeriodic(self):
         """Place code here that does things as a result of operator
