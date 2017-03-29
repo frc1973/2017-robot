@@ -101,3 +101,9 @@ class PhysicsEngine(object):
             data = self.vision.compute(now, x, y, angle)
             if data is not None:
                 self.nt.putNumberArray('/camera/target', data[0][:3])
+            
+            distance = self.vision.get_immediate_distance()
+            if distance is None:
+                distance = 5.0*0.3
+            
+        hal_data['analog_in'][0]['avg_voltage'] = max(min(distance*0.3, 5.0), 0.0)
