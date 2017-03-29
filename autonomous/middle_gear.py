@@ -16,4 +16,4 @@ class MiddleGear(AutonomousStateMachine):
 
     @state(first=True)
     def rotateTotarget(self):
-        self.do_rotate.rotateTotarget()
+        self.rotator.rotateTotarget()

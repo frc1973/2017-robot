@@ -11,7 +11,7 @@ class Rotator:
 
     enabled = ntproperty('/camera/enabled', False)
     target = ntproperty('/camera/target', (0, 0, INF))
-    Px = tunable(0.1)
+    Px = tunable(1)
 
 
 
@@ -31,12 +31,17 @@ class Rotator:
         found, time, offset=self.target
         ra=self.gyro.getAngle()
 
+        # do I have new information?
         if self.lasttime < time:
-           self.found = found
-           self.targetangle = ra - offset
+            # update the information
+            self.found = found > 0
+            self.targetangle = ra - offset
 
         if self.found:
             offset = ra-self.targetangle
-            x=self.Px*offset
+            x = self.Px*offset
+            print(x)
+            self.drivetrain.rotate(x)
+
             if abs(offset)<10:
                 self.drivetrain.driveToWall()
