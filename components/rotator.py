@@ -13,6 +13,7 @@ class Rotator(StateMachine):
     enabled = ntproperty('/camera/enabled', False)
     target = ntproperty('/camera/target', (0, 0, INF))
     Px = tunable(0.1)
+    MaxX = tunable(0.6)
     
     #rotate_x = tunable(0)
     #offset = tunable(0)
@@ -45,6 +46,8 @@ class Rotator(StateMachine):
         if self.found:
             offset = ra-self.targetangle
             x = self.Px*offset
+            
+            x = max(min(self.MaxX, x), -self.MaxX)
             
             #self.offset = offset
             #self.rotate_x = x
