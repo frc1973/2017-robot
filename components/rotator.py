@@ -28,16 +28,15 @@ class Rotator:
 
 
     def execute (self):
-        found, time, lasttime, offset=self.target
+        found, time, offset=self.target
         ra=self.gyro.getAngle()
 
         if self.lasttime < time:
            self.found = found
-           self.lasttime = time
-           self.target = ra - offset
+           self.targetangle = ra - offset
 
         if self.found:
-            offset = ra-self.target
+            offset = ra-self.targetangle
             x=self.Px*offset
             if abs(offset)<10:
                 self.drivetrain.driveToWall()

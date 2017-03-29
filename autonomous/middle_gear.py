@@ -4,6 +4,7 @@ from magicbot import AutonomousStateMachine, timed_state, state
 import wpilib
 
 from components.drivetrain import DriveTrain
+from components.rotator import Rotator
 
 class MiddleGear(AutonomousStateMachine):
 
@@ -11,7 +12,8 @@ class MiddleGear(AutonomousStateMachine):
     default = False
 
     drivetrain = DriveTrain
+    rotator = Rotator
 
-    @timed_state(duration=5, first=True)
-    def driveTothewall(self):
-        self.drivetrain.driveToWall()
+    @state(first=True)
+    def rotateTotarget(self):
+        self.do_rotate.rotateTotarget()
