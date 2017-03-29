@@ -56,7 +56,8 @@ class PhysicsEngine(object):
             ]
 
             self.vision = VisionSim(targets, 61.0,
-                                    1.5, 15, 15)
+                                    1.5, 15, 15,
+                                    physics_controller=self.physics_controller)
         else:
             self.vision = None
 
