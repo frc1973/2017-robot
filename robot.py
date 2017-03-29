@@ -11,8 +11,8 @@ class MyRobot(MagicRobot):
     # Define components here
     #
 
-    drivetrain = DriveTrain
     rotator = Rotator
+    drivetrain = DriveTrain
 
     twitchy = tunable(0.85)
 
@@ -61,17 +61,18 @@ class MyRobot(MagicRobot):
 
         self.drivetrain.move(self.leftStick.getY(), self.twitchy*self.leftStick.getX())
 
-        if self.leftStick.getTrigger():
-            self.drivetrain.rotateTotarget()
-
         if not self.rightStick.getTrigger():
             if self.leftStick.getRawButton(7):
                 self.drivetrain.move(-self.leftStick.getY(), self.twitchy*self.leftStick.getX())
                 self.lifter_motor.set(1)
             else:
                 self.lifter_motor.set(0)
+        
         if self.rightStick.getTrigger():
             self.lifter_motor.set(self.rightStick.getY())
+            
+        if self.leftStick.getTrigger():
+            self.rotator.rotateTotarget()
 
 if __name__ == '__main__':
     wpilib.run(MyRobot)
