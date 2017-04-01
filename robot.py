@@ -42,7 +42,7 @@ class MyRobot(MagicRobot):
 
         #2Joysticks
         self.leftStick = wpilib.Joystick(0)
-        self.rightStick = wpilib.Joystick(1)
+        #self.rightStick = wpilib.Joystick(1)
 
 
         # 5 motor controlors: 1colocter, 2 for weels, 1 for shooter
@@ -61,16 +61,16 @@ class MyRobot(MagicRobot):
 
         self.drivetrain.move(self.leftStick.getY(), self.twitchy*self.leftStick.getX())
 
-        if not self.rightStick.getTrigger():
-            if self.leftStick.getRawButton(7):
-                self.drivetrain.move(-self.leftStick.getY(), self.twitchy*self.leftStick.getX())
-                self.lifter_motor.set(1)
-            else:
-                self.lifter_motor.set(0)
-        
-        if self.rightStick.getTrigger():
-            self.lifter_motor.set(self.rightStick.getY())
-            
+        #if not self.rightStick.getTrigger():
+        if self.leftStick.getRawButton(7):
+            self.drivetrain.move(-self.leftStick.getY(), self.twitchy*self.leftStick.getX())
+            self.lifter_motor.set(1)
+        else:
+            self.lifter_motor.set(0)
+
+        #if self.rightStick.getTrigger():
+        #    self.lifter_motor.set(self.rightStick.getY())
+
         if self.leftStick.getTrigger():
             self.rotator.rotateTotarget()
 

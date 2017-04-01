@@ -9,11 +9,12 @@ from components.rotator import Rotator
 class MiddleGear(AutonomousStateMachine):
 
     MODE_NAME = 'MiddleGear'
-    default = False
+    DEFAULT = False
 
     drivetrain = DriveTrain
     rotator = Rotator
 
     @state(first=True)
     def rotateTotarget(self):
+        self.drivetrain.driveToWall()
         self.rotator.rotateTotarget()

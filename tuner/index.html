@@ -27,6 +27,7 @@
 						<input id="logging_enabled" type="checkbox"> Logging enabled<br/>
 						<input id="draw_targets" type="checkbox"> Draw Targets<br/>
 						<input id="draw_thresh" type="checkbox"> Draw Threshold<br/>
+						<input id="tuning" type="checkbox">Tuning<br/>
 					</div>
 					<div class="col-md-6">
 						Connected: <span id="robotstate"></span><br>
@@ -109,7 +110,7 @@ $(document).ready(function(){
 	      $(this)
 	        .nextAll(".output:first")
 	          .html(data.value);
-	      
+
 	    }).bind("change", function(event) {
 	    	if (event.trigger != "setValue") {
 	    		NetworkTables.setValue('/camera/thresholds/' + this.id, event.value);

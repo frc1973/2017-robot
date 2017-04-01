@@ -52,7 +52,7 @@ class PhysicsEngine(object):
                 # middle
                 VisionSim.Target(18.5, 16, 295, 65), # angle is 180
                 # left
-                VisionSim.Target(16, 20, 340, 110), # angle is -142
+                VisionSim.Target(16, 20, 320, 110), # angle is -142
             ]
 
             self.vision = VisionSim(targets, 61.0,
@@ -98,12 +98,13 @@ class PhysicsEngine(object):
         if self.vision:
             x, y, angle = self.physics_controller.get_position()
 
+            #data = None
             data = self.vision.compute(now, x, y, angle)
             if data is not None:
                 self.nt.putNumberArray('/camera/target', data[0][:3])
-            
+
             distance = self.vision.get_immediate_distance()
             if distance is None:
                 distance = 5.0*0.3
-            
+
         hal_data['analog_in'][0]['avg_voltage'] = max(min(distance*0.3, 5.0), 0.0)
