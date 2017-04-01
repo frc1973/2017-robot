@@ -9,13 +9,13 @@ class DriveTrain:
         Simple magicbot drive object
     '''
 
-    wall_p = tunable(-15)
+    wall_p = tunable(-2.0)
     distance = tunable(0)
     analog = tunable(0)
 
     tx = tunable(0)
     ty = tunable(0)
-    offset = tunable(1.3)
+    offset = tunable(1.1)
 
     MaxY = tunable(0.8)
 
@@ -33,13 +33,17 @@ class DriveTrain:
     def rotate(self, x):
         self.x = x
 
+    def atWall(self):
+        return abs(self.getDistance()) < 0.15
+
     def driveToWall(self):
 
         distance = self.getDistance()
         distance = max(min(14.0, distance), -self.offset)
 
-        if abs(distance)<0.2:
+        if abs(distance)<0.15:
             self.y = 0
+            self.x = 0
         else:
 
             y = self.wall_p*distance

@@ -14,7 +14,7 @@ class MyRobot(MagicRobot):
     rotator = Rotator
     drivetrain = DriveTrain
 
-    twitchy = tunable(0.85)
+    twitchy = tunable(0.9)
 
     def createObjects(self):
         """Initialize all wpilib motors & sensors"""
@@ -73,6 +73,8 @@ class MyRobot(MagicRobot):
 
         if self.leftStick.getTrigger():
             self.rotator.rotateTotarget()
+        if self.leftStick.getRawButton(10):
+            self.drivetrain.driveToWall()
 
 if __name__ == '__main__':
     wpilib.run(MyRobot)

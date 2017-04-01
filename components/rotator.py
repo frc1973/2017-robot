@@ -56,15 +56,15 @@ class Rotator(StateMachine):
 
             #x = max(min(self.MaxX, x), -self.MaxX)
             #x = 0.6 + x/100
-            scaled_x = 0.6 + abs(x)/100.0
+            scaled_x = 0.67 + abs(x)/100.0
             scaled_x = math.copysign(scaled_x, x)
 
             scaled_x = max(min(self.MaxX, scaled_x), -self.MaxX)
 
             #self.offset = offset
             #self.rotate_x = x
-
-            self.drivetrain.rotate(scaled_x)
+            if not self.drivetrain.atWall():
+                self.drivetrain.rotate(scaled_x)
 
             if abs(offset)<10:
                 self.drivetrain.driveToWall()
