@@ -9,13 +9,13 @@ class DriveTrain:
         Simple magicbot drive object
     '''
 
-    wall_p = tunable(-2.0)
+    wall_p = tunable(-1.8)
     distance = tunable(0)
     analog = tunable(0)
 
     tx = tunable(0)
     ty = tunable(0)
-    offset = tunable(1.1)
+    offset = tunable(1.0)
 
     MaxY = tunable(0.8)
 
