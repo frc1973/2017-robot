@@ -12,7 +12,8 @@
         "field": {
             "w": 27,
             "h": 27,
-            "px_per_ft": 17
+            "px_per_ft": 17,
+            "image": null
         }
     }
 }
